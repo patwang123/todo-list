@@ -5,6 +5,7 @@ from . import views
 router = routers.DefaultRouter()
 router.register(r'tasks', views.TaskViewSet, 'tasks')
 router.register(r'categories', views.CategoryViewSet, 'categories')
+router.register(r'people', views.PersonViewSet,'people')
 
 urlpatterns = [
     path('', include(router.urls)),

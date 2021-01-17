@@ -14,6 +14,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+class PersonViewSet(viewsets.ModelViewSet):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
 def home(request):
     template = 'tasks.html'
 
@@ -26,10 +30,12 @@ def completed(request):
     template = 'tasks.html'
 
     completed_tasks = Task.objects.all() #FILTER BY COMPLETED, ANNOTATE TIME LEFT, ETC
+
     return render(request, template, {'todo_tasks': completed_tasks})
 
 def per_person(request):
     template = 'persons.html'
 
-    tasks_per_person = Person.objects.all()
-    return render()
+    tasks_per_person = Person.objects.all() #FILTER TASKSET BY COMPLETED ETC
+
+    return render(request, template, {'peoples_tasks': tasks_per_person})
