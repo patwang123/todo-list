@@ -1,0 +1,33 @@
+.task{
+    margin-top: 10px;
+    margin-bottom: 10px;  
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-width: 2px;
+    border-bottom-width: 1px;
+    border-bottom-color:rgba(202, 202, 202, 0.5);
+    border-bottom-style: solid;
+    width: 100%;
+    
+    display:flex;
+}
+
+.sub{
+    margin-left: auto
+}
+
+.task-header{
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-width: 2px;
+    border-bottom-width: 1px;
+    border-bottom-color:rgba(202, 202, 202, 0.5);
+    border-bottom-style: solid;
+    width: 100%;
+    
+    display:flex;
+}

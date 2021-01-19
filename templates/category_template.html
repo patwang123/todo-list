@@ -1,0 +1,41 @@
+{% load static %}
+{% load extras %}
+
+{% load el_pagination_tags %}
+
+
+{% paginate todo_tasks %}
+{% for task in todo_tasks %}
+<div class='task'>
+    <div>
+        {{ item.name }}
+        <small class="text-muted d-block" >
+                Last purchased
+                {% if item.latest_purchase >= 3600 %}
+                    {% if item.latest_purchase < 7200 %}
+                        an hour
+                    {% else %}
+                        {{ item.latest_purchase|int_divide:3600}} hours
+                    {% endif %}
+                {% elif item.latest_purchase >= 60 %}
+                    {% if item.latest_purchase < 120 %}
+                        a minute
+                    {% else %}
+                        {{ item.latest_purchase|int_divide:60 }} minutes
+                    {% endif %}
+                {% else %}
+                    {% if item.latest_purchase == 1 %}
+                        a second
+                    {% else %}
+                        {{ item.latest_purchase }} seconds
+                    {% endif %}
+                {% endif %}
+                
+                ago</small>
+    </div>
+    <div class='sub'>
+        {{ item.num_purchased }} purchased recently
+    </div>
+</div>
+{% endfor %}
+{% show_more "more" %}
