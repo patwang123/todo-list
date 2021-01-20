@@ -12,7 +12,7 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Task
         fields = ('name','task_set',)
 
-class PersonSerializer(serializers.ModelSerializers):
+class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = ('name', 'task_set',)
