@@ -12,6 +12,7 @@ class Person(models.Model):
 
 class Task(models.Model):
     name = models.CharField(max_length=100)
+    description = models.TextField(blank=True,null=True)
     person = models.ForeignKey(Person,on_delete=models.CASCADE,blank=True,null=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE,default='General')
     created_date = models.DateField(default=timezone.now)
@@ -27,4 +28,3 @@ class Task(models.Model):
         ASAP = 4
 
     priority = models.IntegerField(choices=Priority.choices)
-

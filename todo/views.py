@@ -23,8 +23,9 @@ def home(request):
 
     # FILTER BY COMPLETED, ANNOTATE TIME LEFT, ETC
     incomplete_tasks = Task.objects.all()
+    categories = Category.objects.all()
 
-    return render(request, template, {'todo_tasks': incomplete_tasks})
+    return render(request, template, {'todo_tasks': incomplete_tasks, 'categories': categories})
 
 def completed(request):
     template = 'tasks.html'
