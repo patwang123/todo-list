@@ -17,12 +17,16 @@
                 <form action="" method="post">
                 {% csrf_token %} <!-- csrf token for basic security -->
                     <div class="inputContainer">
-                        <input type="text" id="description" class="taskName" placeholder="What do you need to do?" name="description" required>
+                        <input type="text" id="name" class="taskName" placeholder="Name of task" name="name" required>
+                        <label for="name">Name</label>
+                    </div>
+                    <div class="inputContainer">
+                        <input type="text" id="description" class="taskDescription" placeholder="What do you need to do?" name="description" required>
                         <label for="description">Description</label>
                     </div>
                     <div class="inputContainer half last">
                         <i class="fa fa-caret-down selectArrow"></i>
-                        <select id="category" class="taskCategory" name="category_select">
+                        <select id="category" class="taskCategory" name="category">
                         <option class="disabled" value="">Choose a category</option>
                         {% for category in categories %}
                             <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
@@ -30,15 +34,31 @@
                         </select>
                         <label for="category">Category</label>
                     </div>
+                    <div class="inputContainer half last">
+                        <i class="fa fa-caret-down selectArrow"></i>
+                        <select id="person" class="taskPerson" name="person">
+                        <option class="disabled" value="">Choose a person</option>
+                        {% for person in people %}
+                            <option class="" value="{{ person.name }}" name="{{ person.name }}">{{ person.name }}</option>
+                        {% endfor %}
+                        </select>
+                        <label for="person">Person</label>
+                    </div>
                     <div class="inputContainer half last right">
-                        <input type="date" id="dueDate" class="taskDate" name="date">
+                        <input type="datetime-local" id="dueDate" class="taskDate" name="date">
                         <label for="dueDate">Due Date</label>
+                    </div>
+                    <div class="inputContainer">
+                        <input type="number" id="priority" class="taskName" placeholder="Name of task" name="priority" required>
+                        <label for="priority">Priority</label>
                     </div>
                     <div class="row">
                         <button class="taskAdd" name="taskAdd" type="submit"><i class="fa fa-plus icon"></i>Add task</button>
                         <button class="taskDelete" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();"><i class="fa fa-trash-o icon"></i>Delete Tasks</button>
                     </div>
                 <ul class="taskList">
+
+
                 {% for todo in todos %} <!-- django template lang - for loop -->
                     <li class="taskItem">
                         <input type="checkbox" class="taskCheckbox" name="checkedbox" id="{{ todo.id }}" value="{{ todo.id }}">

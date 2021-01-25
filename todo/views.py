@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+import django
 from .models import Task, Category, Person
 from .serializers import TaskSerializer, CategorySerializer, PersonSerializer
 from rest_framework import viewsets
@@ -24,8 +25,29 @@ def home(request):
     # FILTER BY COMPLETED, ANNOTATE TIME LEFT, ETC
     incomplete_tasks = Task.objects.all()
     categories = Category.objects.all()
+    people = Person.objects.all()
 
-    return render(request, template, {'todo_tasks': incomplete_tasks, 'categories': categories})
+    if request.method == "POST":  # checking if the request method is a POST
+        if "taskAdd" in request.POST:  # checking if there is a request to add a todo
+                name = request.POST['name']
+                description = request.POST['description']
+                due_date = request.POST["date"]  # date
+                category = Category.objects.get(name=request.POST["category"])
+                person = Person.objects.get(name=request.POST['person'])
+                priority = request.POST['priority']
+                Todo = Task(name=name, description=description, due_date=due_date,
+                                category=category, person=person, priority = priority)
+                Todo.save()
+                return redirect("/")
+
+        if "taskDelete" in request.POST:  # checking if there is a request to delete a todo
+            # checked todos to be deleted
+            checkedlist = request.POST["checkedbox"]
+            for todo_id in checkedlist:
+                todo = Task.objects.get(id=int(todo_id))  # getting todo id
+                todo.delete()  # deleting todo
+
+    return render(request, template, {'todo_tasks': incomplete_tasks, 'categories': categories, 'people': people})
 
 def completed(request):
     template = 'tasks.html'
