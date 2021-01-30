@@ -9,10 +9,12 @@ class TaskSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Task
+        model = Category
         fields = ('name','task_set',)
+        depth = 2
 
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = ('name', 'task_set',)
+        depth = 2

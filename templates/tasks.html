@@ -7,6 +7,7 @@
     <title>Todo list</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/item.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
 </head>
 <body>
     <div django-app="TaskManager">        
@@ -24,24 +25,26 @@
                         <label for="description">Description</label>
                     </div>
                     <div class="inputContainer half last">
-                        <i class="fa fa-caret-down selectArrow"></i>
+
                         <input id="category" class="taskCategory" name="category" list='categories' required/>
                             <datalist id='categories'>
                                 {% for category in categories %}
                                     <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
                                 {% endfor %}
                             </datalist>
+                        <i class="fa fa-caret-down selectArrow"></i>
                         <label for="category">Category</label>
                     </div>
                     <div class="inputContainer half last">
-                        <i class="fa fa-caret-down selectArrow"></i>
-                        <input id="person" name="person" list = 'people' required/>
+                        
+                        <input id="person" name="person" list = 'people' required />
+                        
                             <datalist id='people'>
                                 {% for person in people %}
                                     <option value="{{ person.name }}"> {{ person.name }} </option>
                                 {% endfor %}
                             </datalist>
-                        </select>
+                        <i class="fa fa-caret-down selectArrow"></i>
                         <label for="person">Person</label>
                     </div>
                     <div class="inputContainer half last right">
@@ -49,16 +52,16 @@
                         <label for="dueDate">Due Date</label>
                     </div>
                     <div class="inputContainer">
-                        <input type="number" id="priority" placeholder="priority" name="priority" list='priorities' required/>
-                            <datalist id='priorities'>
+                        <select type="number" id="priority" placeholder="priority" name="priority"  required>
                                 {% for priority in priorities %}
                                     <option value="{{ priority }}"> {{ priority }} </option>
                                 {% endfor %}
-                            </datalist>
+                        </select>
                         <label for="priority">Priority</label>
                     </div>
                     <div>
-                        <button class="taskAdd" name="taskAdd" type="submit"><i class="fa fa-plus icon"></i>Add task</button>
+                        
+                        <button class="taskAdd" name="taskAdd" type="submit"><i class="fa fa-plus"></i>Add task</button>
                         <button class="taskDelete" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();"><i class="fa fa-trash-o icon"></i>Delete Tasks</button>
                     </div>
                     <h2>Todo list!</h2>
