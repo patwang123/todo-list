@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Snackpass</title>
+    <title>Todo list</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/item.css' %}">
 </head>
@@ -12,85 +12,67 @@
     <div django-app="TaskManager">        
         <div class="container">
                 <div class="content">
-                <h1>TodoApp</h1>
-                <p class="tagline">a Django todo app</p>
-                <form action="" method="post">
-                {% csrf_token %} <!-- csrf token for basic security -->
-                    <div class="inputContainer">
-                        <input type="text" id="name" class="taskName" placeholder="Name of task" name="name" required>
-                        <label for="name">Name</label>
-                    </div>
-                    <div class="inputContainer">
-                        <input type="text" id="description" class="taskDescription" placeholder="What do you need to do?" name="description" required>
-                        <label for="description">Description</label>
-                    </div>
-                    <div class="inputContainer half last">
-                        <i class="fa fa-caret-down selectArrow"></i>
-                        <select id="category" class="taskCategory" name="category">
-                        <option class="disabled" value="">Choose a category</option>
-                        {% for category in categories %}
-                            <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
-                        {% endfor %}
-                        </select>
-                        <label for="category">Category</label>
-                    </div>
-                    <div class="inputContainer half last">
-                        <i class="fa fa-caret-down selectArrow"></i>
-                        <select id="person" class="taskPerson" name="person">
-                        <option class="disabled" value="">Choose a person</option>
-                        {% for person in people %}
-                            <option class="" value="{{ person.name }}" name="{{ person.name }}">{{ person.name }}</option>
-                        {% endfor %}
-                        </select>
-                        <label for="person">Person</label>
-                    </div>
-                    <div class="inputContainer half last right">
-                        <input type="datetime-local" id="dueDate" class="taskDate" name="date">
-                        <label for="dueDate">Due Date</label>
-                    </div>
-                    <div class="inputContainer">
-                        <input type="number" id="priority" class="taskName" placeholder="Name of task" name="priority" required>
-                        <label for="priority">Priority</label>
-                    </div>
-                    <div class="row">
-                        <button class="taskAdd" name="taskAdd" type="submit"><i class="fa fa-plus icon"></i>Add task</button>
-                        <button class="taskDelete" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();"><i class="fa fa-trash-o icon"></i>Delete Tasks</button>
-                    </div>
-                <ul class="taskList">
+                    <h6> Try adding a task! </h6>
+                    <form action="" method="post">
+                        {% csrf_token %} <!-- csrf token for basic security -->
+                        <div class="inputContainer">
+                            <input type="text" id="name" class="taskName" placeholder="Name of task" name="name" required>
+                            <label for="name">Name</label>
+                        </div>
+                        <div class="inputContainer">
+                            <input type="text" id="description" class="taskDescription" placeholder="What do you need to do?" name="description" required>
+                            <label for="description">Description</label>
+                        </div>
+                        <div class="inputContainer half last">
+                            <i class="fa fa-caret-down selectArrow"></i>
+                            <input id="category" class="taskCategory" name="category" list='categories'/>
+                                <datalist id='categories'>
+                                    {% for category in categories %}
+                                        <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
+                                    {% endfor %}
+                                </datalist>
+                            <label for="category">Category</label>
+                        </div>
+                        <div class="inputContainer half last">
+                            <i class="fa fa-caret-down selectArrow"></i>
+                            <input id="person" name="person" list = 'people'/>
+                                <datalist id='people'>
+                                    {% for person in people %}
+                                        <option value="{{ person.name }}"> {{ person.name }} </option>
+                                    {% endfor %}
+                                </datalist>
+                            </select>
+                            <label for="person">Person</label>
+                        </div>
+                        <div class="inputContainer half last right">
+                            <input type="datetime-local" id="dueDate" name="date">
+                            <label for="dueDate">Due Date</label>
+                        </div>
+                        <div class="inputContainer">
+                            <input type="number" id="priority" placeholder="priority" name="priority" required>
+                            <label for="priority">Priority</label>
+                        </div>
+                        <div class="row">
+                            <button class="taskAdd" name="taskAdd" type="submit"><i class="fa fa-plus icon"></i>Add task</button>
+                            <button class="taskDelete" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();"><i class="fa fa-trash-o icon"></i>Delete Tasks</button>
+                        </div>
+                        <h2 style='margin-top: 20px'>Todo list!</h2>
+                            <h6>Created by Patrick Wang</h6>
+                            <div  style='margin-bottom: 20px;'> Scroll down to load more items! </div>
+                            <div class='task-header'>
+                                <div>Name</div>
+                                <div class='sub'>Description</div>
+                                <div class='sub'>Due date</div>
+                                <div class='sub'>Priority</div>
+                            </div>
+                            {% include 'category_template.html' %}
 
-
-                {% for todo in todos %} <!-- django template lang - for loop -->
-                    <li class="taskItem">
-                        <input type="checkbox" class="taskCheckbox" name="checkedbox" id="{{ todo.id }}" value="{{ todo.id }}">
-                        <label for="{{ todo.id }}"><span class="complete-">{{ todo.title }}</span></label>
-                        <span class="category-{{ todo.category }}">{{ todo.category }}</span>
-                        <strong class="taskDate"><i class="fa fa-calendar"></i>{{ todo.created }} - {{ todo.due_date }}</strong>
-                    </li>
-                {% endfor %}
-                </ul><!-- taskList -->
-                </form>
+                    </form>
                 </div><!-- content -->
-    </div><!-- container -->
+        </div><!-- container -->
     </div>
     <div class="container">
-        <h2 style='margin-top: 20px'>Snackpass trending foods!</h2>
-        <h6>Created by Patrick Wang</h6>
-        <div  style='margin-bottom: 20px;'> Scroll down to load more items! </div>
-        <div class='task-header'>
-            <div>
-                Name
-            </div>
-            <div class='sub'>
-                Description
-            </div>
-            <div class='sub'>
-                Due date
-            </div>
-            <div class='sub'>
-                Quantity
-            </div>
-        </div>
-        {% include 'category_template.html' %}
+        
         
     </div>
 
