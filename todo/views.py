@@ -41,13 +41,13 @@ def home(request):
 
         if "taskDelete" in request.POST:  # checking if there is a request to delete a todo
             # checked todos to be deleted
-            checkedlist = request.POST["checkedbox"]
+            checkedlist = request.POST["id_to_delete"]
             for todo_id in checkedlist:
                 todo = Task.objects.get(id=int(todo_id))  # getting todo id
                 todo.delete()  # deleting todo
             return redirect('/')
 
-    return render(request, template, {'todo_tasks': incomplete_tasks, 'categories': categories, 'people': people})
+    return render(request, template, {'todo_tasks': incomplete_tasks, 'categories': categories, 'people': people, 'priorities': [0,1,2,3,4]})
 
 def completed(request):
     template = 'tasks.html'

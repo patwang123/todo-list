@@ -25,7 +25,7 @@
                         </div>
                         <div class="inputContainer half last">
                             <i class="fa fa-caret-down selectArrow"></i>
-                            <input id="category" class="taskCategory" name="category" list='categories'/>
+                            <input id="category" class="taskCategory" name="category" list='categories' required/>
                                 <datalist id='categories'>
                                     {% for category in categories %}
                                         <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="inputContainer half last">
                             <i class="fa fa-caret-down selectArrow"></i>
-                            <input id="person" name="person" list = 'people'/>
+                            <input id="person" name="person" list = 'people' required/>
                                 <datalist id='people'>
                                     {% for person in people %}
                                         <option value="{{ person.name }}"> {{ person.name }} </option>
@@ -49,10 +49,15 @@
                             <label for="dueDate">Due Date</label>
                         </div>
                         <div class="inputContainer">
-                            <input type="number" id="priority" placeholder="priority" name="priority" required>
+                            <input type="number" id="priority" placeholder="priority" name="priority" list='priorities' required/>
+                                <datalist id='priorities'>
+                                    {% for priority in priorities %}
+                                        <option value="{{ priority }}"> {{ priority }} </option>
+                                    {% endfor %}
+                                </datalist>
                             <label for="priority">Priority</label>
                         </div>
-                        <div class="row">
+                        <div>
                             <button class="taskAdd" name="taskAdd" type="submit"><i class="fa fa-plus icon"></i>Add task</button>
                             <button class="taskDelete" name="taskDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();"><i class="fa fa-trash-o icon"></i>Delete Tasks</button>
                         </div>

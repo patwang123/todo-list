@@ -7,7 +7,7 @@
 {% paginate todo_tasks %}
 {% for task in todo_tasks %}
 <div class='task'>
-    <input type="checkbox" class="taskCheckbox" name="checkedbox" id="{{ task.id }}" value="{{ task.id }}">
+    <input type="checkbox" class="taskCheckbox" name="id_to_delete" id="{{ task.id }}" value="{{ task.id }}">
     <div>
         {{ task.name }}
     </div>
