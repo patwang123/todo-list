@@ -1,4 +1,5 @@
 {% load static %}
+{% load extras %}
 <!DOCTYPE html>
 <html>
 
@@ -16,17 +17,17 @@
                 <h6> Try adding a task! </h6>
                 <form action="" method="post">
                     {% csrf_token %} <!-- csrf token for basic security -->
-                    <div class="inputContainer">
+                    <div>
                         <input type="text" id="name" class="taskName" placeholder="Name of task" name="name" required>
                         <label for="name">Name</label>
                     </div>
-                    <div class="inputContainer">
+                    <div>
                         <input type="text" id="description" class="taskDescription" placeholder="What do you need to do?" name="description" required>
                         <label for="description">Description</label>
                     </div>
-                    <div class="inputContainer half last">
+                    <div>
 
-                        <input id="category" class="taskCategory" name="category" list='categories' required/>
+                        <input id="category" class="taskCategory" name="category" list='categories' required>
                             <datalist id='categories'>
                                 {% for category in categories %}
                                     <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
@@ -35,9 +36,9 @@
                         <i class="fa fa-caret-down selectArrow"></i>
                         <label for="category">Category</label>
                     </div>
-                    <div class="inputContainer half last">
+                    <div>
                         
-                        <input id="person" name="person" list = 'people' required />
+                        <input id="person" name="person" list = 'people' required>
                         
                             <datalist id='people'>
                                 {% for person in people %}
@@ -47,14 +48,14 @@
                         <i class="fa fa-caret-down selectArrow"></i>
                         <label for="person">Person</label>
                     </div>
-                    <div class="inputContainer half last right">
+                    <div>
                         <input type="datetime-local" id="dueDate" name="date">
                         <label for="dueDate">Due Date</label>
                     </div>
                     <div class="inputContainer">
                         <select type="number" id="priority" placeholder="priority" name="priority"  required>
                                 {% for priority in priorities %}
-                                    <option value="{{ priority }}"> {{ priority }} </option>
+                                    <option value="{{ priority }}"> {{ priority|convert_priority}} </option>
                                 {% endfor %}
                         </select>
                         <label for="priority">Priority</label>

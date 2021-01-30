@@ -18,7 +18,7 @@
         {{ task.due_date}}
     </div>
     <div class='sub'>
-        {{ task.priority }}
+        {{ task.priority|convert_priority}}
     </div>
 </div>
 {% endfor %}
