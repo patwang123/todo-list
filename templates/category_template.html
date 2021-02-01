@@ -1,25 +1,16 @@
 {% load static %}
 {% load extras %}
 
-{% load el_pagination_tags %}
 
-
-{% paginate todo_tasks %}
 {% for task in todo_tasks %}
-<div class='task'>
-    <input type="checkbox" class="taskCheckbox" name="id_to_delete" id="{{ task.id }}" value="{{ task.id }}">
-    <div>
-        {{ task.name }}
-    </div>
-    <div class='sub'>
-        {{task.description}}
-    </div>
-    <div class='sub'>
-        {{ task.due_date}}
-    </div>
-    <div class='sub'>
-        {{ task.priority|convert_priority}}
-    </div>
-</div>
+<tr>
+    <td><input type='checkbox' name='id_to_delete' id = '{{task.id}}' value={{task.id}} ></td>
+    <td>{{ task.name }}</td>
+    <td>{{ task.description|filter_none }}</td>
+    <td>{{ task.category.name }}</td>
+    <td>{{ task.person.name }}</td>
+    <td>{{ task.created_date}}</td>
+    <td>{{ task.due_date|filter_none }}</td>
+    <td>{{ task.priority|convert_priority }}</td>
+</tr>
 {% endfor %}
-{% show_more "more" %}

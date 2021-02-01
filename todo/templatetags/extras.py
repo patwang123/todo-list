@@ -13,3 +13,9 @@ priorities = {0:'N/A',1:'Low',2: 'Medium',3:'High',4: 'ASAP'}
 @register.filter
 def convert_priority(value):
     return priorities[value]
+
+@register.filter
+def filter_none(value):
+    if value is None:
+        return ''
+    return value

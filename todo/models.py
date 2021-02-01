@@ -10,12 +10,16 @@ class Category(models.Model):
 class Person(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
 
+def tz_date():
+    return timezone.now().date()
+
 class Task(models.Model):
+
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True,null=True)
     person = models.ForeignKey(Person,on_delete=models.CASCADE,blank=True,null=True)
     category = models.ForeignKey(Category,on_delete=models.CASCADE,default='General')
-    created_date = models.DateField(default=timezone.now)
+    created_date = models.DateField(default=tz_date)
     due_date = models.DateTimeField(blank=True, null=True)
 
     completed = models.BooleanField(default=False)
@@ -26,5 +30,5 @@ class Task(models.Model):
         MEDIUM = 2
         HIGH = 3
         ASAP = 4
-
+    
     priority = models.IntegerField(choices=Priority.choices)

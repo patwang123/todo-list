@@ -97,6 +97,10 @@ DATABASES = {
         'PORT': '3306',
         'USER': 'root',
         'PASSWD': '',
+        'OPTIONS': { 
+            "init_command": "SET foreign_key_checks = 0;",
+        },
+        'STORAGE_ENGINE': 'MyISAM / INNODB / ETC'
     }
 }
 
@@ -135,7 +139,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
